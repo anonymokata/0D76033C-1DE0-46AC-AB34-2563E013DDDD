@@ -11,7 +11,7 @@ As a Roman bookkeeper, I want to be able to subtract one number from another. So
 ## Requirements
 1. Roman Numeral Constraints
     1. Roman numerals consist of the following letters: I, V, X, L, C, D, and M which mean one, five, ten, fifty, hundred, five hundred and one thousand respectively.
-    2. An example would be "XIV" + "LX" = "LXXIV"
+    2. An example addition would be "XIV" + "LX" = "LXXIV"
     3. Numerals can be concatenated to form a larger numeral ("XX" + "II" = "XXII").
     4. If a lesser numeral is put before a bigger it means subtraction of the lesser from the bigger ("IV"
 means four, "CM" means ninehundred).

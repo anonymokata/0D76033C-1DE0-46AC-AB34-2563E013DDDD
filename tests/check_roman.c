@@ -20,6 +20,26 @@ START_TEST(test_sanity)
 }
 END_TEST
 
+START_TEST(test_I_X_C_repeats_no_more_than_three_times_req_1_5)
+{
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("I"));
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("II"));
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("III"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("IIII"));
+
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("X"));
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("XX"));
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("XXX"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("XXXX"));
+
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("C"));
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("CC"));
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("CCC"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("CCCC"));
+}
+END_TEST
+
+
 START_TEST(test_valid_roman_letters_req_1_1)
 {
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("I"));
@@ -54,6 +74,7 @@ Suite * Roman_Suite(void)
     tc_int_conv = tcase_create("Validation Conversions");
     tcase_add_checked_fixture(tc_int_conv, setup, teardown);
     tcase_add_test(tc_int_conv, test_valid_roman_letters_req_1_1);
+    tcase_add_test(tc_int_conv, test_I_X_C_repeats_no_more_than_three_times_req_1_5);
     suite_add_tcase(s, tc_int_conv);
 
     

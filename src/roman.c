@@ -33,10 +33,13 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
                 break;
             }
             
-        } else if((numeral[i] == 'V') || 
-           (numeral[i] == 'L') || 
-           (numeral[i] == 'D') || 
-           (numeral[i] == 'M')) {
+        } else if((numeral[i] == 'V') || (numeral[i] == 'L') || (numeral[i] == 'D')) {
+           // We can't have any duplicates at all
+            if(duplicate_count > 1) {
+                ret = INVALID_NUMERAL;
+                break;
+            }
+        } else if(numeral[i] == 'M') {
            // No Op
         } else {
             ret = INVALID_NUMERAL;

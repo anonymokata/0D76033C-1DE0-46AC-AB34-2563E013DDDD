@@ -33,6 +33,17 @@ START_TEST(test_roman_numeral_addition_simple_req_2_3)
 }
 END_TEST
 
+START_TEST(test_roman_numeral_addition_expansion_required_req_2_3)
+{
+    uint8_t result[MAX_ROMAN_LENGTH]; 
+
+    // Basic test
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "IV", "I", result);
+    ck_assert_str_eq("V", result);
+}
+END_TEST
+
 START_TEST(test_roman_numeral_addition_compacting_result_req_2_3)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
@@ -208,9 +219,9 @@ Suite * Roman_Suite(void)
     tcase_add_test(tc_add, test_roman_numeral_addition_simple_req_2_3);
     tcase_add_test(tc_add, test_roman_numeral_addition_simple_magnitue_req_2_3);
     tcase_add_test(tc_add, test_roman_numeral_addition_compacting_result_req_2_3);
+    tcase_add_test(tc_add, test_roman_numeral_addition_expansion_required_req_2_3);
     suite_add_tcase(s, tc_add);
     
-
     return s;
 }
 

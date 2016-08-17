@@ -9,6 +9,7 @@ which yields MMMCMXCIX and allowing for the expansion of 4's and 9's
 (IV, IX, XL, XC, CD, CM) which is 18.  We also need to beable to hold
 two of them in the same field, so doubled would bring it to 36*/ 
 #define MAX_ROMAN_LENGTH 36
+#define MAX_VALID_ROMAN_EXPANDED_LENGTH 18
 #define MAX_VALID_ROMAN_LENGTH 15
 
 typedef struct Roman Roman;

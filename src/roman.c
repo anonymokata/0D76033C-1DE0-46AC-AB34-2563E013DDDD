@@ -26,7 +26,8 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
     uint8_t last_value = NULL;
     uint8_t ret = VALID_NUMERAL;
 
-    // TODO: Protect against invalid subractives (valid: IV, IX, XL, XC, CD, CM)
+    // TODO: Protect against invalid subtractives (valid: IV, IX, XL, XC, CD, CM)
+    // TODO: Protect against invalid subtractive combinations (CMCD, XCXL, IXIV)
 
     if(strlen(numeral) >= MAX_VALID_ROMAN_LENGTH) {
         return INVALID_NUMERAL;
@@ -107,7 +108,7 @@ void roman_free(Roman* r) {
 }
 
 void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
-    uint8_t scratch[MAX_VALID_ROMAN_LENGTH];
+    uint8_t scratch[MAX_VALID_ROMAN_EXPANDED_LENGTH];
     uint8_t scratch_int;
 
     // We first need to check the operands to ensure they're formatted correctly
@@ -124,11 +125,11 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     // We need to:
     // 1.  expand the compressed values (4 and 9 multiples)
     // 2.  Count the number of occurances in each numeral
-    memset(scratch, '\0', MAX_VALID_ROMAN_LENGTH);    
+    memset(scratch, '\0', MAX_VALID_ROMAN_EXPANDED_LENGTH);    
     expand_compressed_numerals(op1, scratch);
     extract_numeral_counts(scratch, &obj->rnc_op1);
 
-    memset(scratch, '\0', MAX_VALID_ROMAN_LENGTH);    
+    memset(scratch, '\0', MAX_VALID_ROMAN_EXPANDED_LENGTH);    
     expand_compressed_numerals(op2, scratch);
     extract_numeral_counts(scratch, &obj->rnc_op2);
 
@@ -167,9 +168,24 @@ void expand_compressed_numerals(uint8_t* src, uint8_t* dst){
     // We can assume the src will be valid as it's should checked prior to this call
     // convert the legal compressed values (IV, IX, XL, etc...) to an expanded form
     // (IIII, VIIII, XXXX, etc...)
+    uint8_t total = 0;
+    uint8_t i = 0;
 
-    // TODO: actually expand them...
-    strcpy(dst, src);
+    while(i<strlen(src)) {
+        if((src[i] == 'I') && src[i+1] == 'V') {
+            dst[total++] = 'I';
+            dst[total++] = 'I';
+            dst[total++] = 'I';
+            dst[total++] = 'I';
+            // Jump to the next variable
+            i+=2;
+        } else {
+            // Just add it to the output & advance
+            dst[total++] = src[i++];
+        }
+    }
+    // Ensure it's null terminated
+    dst[total++] = '\0';
     return;
 }
 

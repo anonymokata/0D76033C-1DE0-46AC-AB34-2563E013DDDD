@@ -22,13 +22,17 @@ static void sum_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Co
 static void build_roman_numeral_str_from_counts(Roman_Numeral_Count* counts, uint8_t* result_str);
  
 uint8_t is_valid_numeral(uint8_t * numeral) {
+    /*
+    Note: The following TODO's are based on a previous knowledge about roman numerals. 
+          They were not added as the requirements did not indicate to limit these values.
+          More information is needed from the customer to determine if we should block these values.
+    TODO: Consider protecting against invalid subtractives (valid: IV, IX, XL, XC, CD, CM)
+    TODO: Consider protecting against invalid subtractive combinations (CMCD, XCXL, IXIV)
+    */
     uint8_t i = 0;
     uint8_t duplicate_count = 1;
     uint8_t last_value = NULL;
     uint8_t ret = VALID_NUMERAL;
-
-    // TODO: Protect against invalid subtractives (valid: IV, IX, XL, XC, CD, CM)
-    // TODO: Protect against invalid subtractive combinations (CMCD, XCXL, IXIV)
 
     if(strlen(numeral) >= MAX_VALID_ROMAN_LENGTH) {
         return INVALID_NUMERAL;

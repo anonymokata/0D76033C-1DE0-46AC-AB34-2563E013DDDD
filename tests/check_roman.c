@@ -43,6 +43,14 @@ START_TEST(test_roman_numeral_addition_expansion_required_req_2_3)
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_add(r, "IX", "I", result);
     ck_assert_str_eq("X", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "XL", "X", result);
+    ck_assert_str_eq("L", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "XC", "X", result);
+    ck_assert_str_eq("C", result);
 }
 END_TEST
 

@@ -177,7 +177,6 @@ void expand_compressed_numerals(uint8_t* src, uint8_t* dst){
             dst[total++] = 'I';
             dst[total++] = 'I';
             dst[total++] = 'I';
-            // Jump to the next variable
             i+=2;
         } else if((src[i] == 'I') && src[i+1] == 'X') {
             dst[total++] = 'V';
@@ -185,7 +184,19 @@ void expand_compressed_numerals(uint8_t* src, uint8_t* dst){
             dst[total++] = 'I';
             dst[total++] = 'I';
             dst[total++] = 'I';
-            // Jump to the next variable
+            i+=2;
+        } else if((src[i] == 'X') && src[i+1] == 'L') {
+            dst[total++] = 'X';
+            dst[total++] = 'X';
+            dst[total++] = 'X';
+            dst[total++] = 'X';
+            i+=2;
+        } else if((src[i] == 'X') && src[i+1] == 'C') {
+            dst[total++] = 'L';
+            dst[total++] = 'X';
+            dst[total++] = 'X';
+            dst[total++] = 'X';
+            dst[total++] = 'X';
             i+=2;
         } else {
             // Just add it to the output & advance

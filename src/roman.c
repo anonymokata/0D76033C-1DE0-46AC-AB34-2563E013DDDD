@@ -40,7 +40,12 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
                 break;
             }
         } else if(numeral[i] == 'M') {
-           // No Op
+            // Rather than to any math on this, we can just as easily check to see that
+            // we dont have more than 3 "M"s in a row as a 4th would put us at 4000
+            if(duplicate_count > 3) {
+                ret = INVALID_NUMERAL;
+                break;
+            }
         } else {
             ret = INVALID_NUMERAL;
         }

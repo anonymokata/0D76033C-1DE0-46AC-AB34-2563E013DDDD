@@ -7,6 +7,7 @@
 
 typedef struct Roman_Numeral_Count Roman_Numeral_Count;
 static const uint8_t INVALID_INPUT_ERROR[] = "Invalid Input";
+static const uint8_t RESULT_OUT_OF_RANGE_ERROR[] = "Out of Range";
 static const uint8_t MAX_I_VALUES = 5;
 static const uint8_t MAX_V_VALUES = 2;
 static const uint8_t MAX_X_VALUES = 5;
@@ -156,6 +157,13 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     obj->rnc_result.D = obj->rnc_result.D % MAX_D_VALUES;
 
     // M is allowed to grow
+
+    // Ok - knowing that everything has been expanded we can safely use 
+    // the total number of "M"s to see if we're over 3999
+    if(obj->rnc_result.M >= 4){
+        strcpy(result, RESULT_OUT_OF_RANGE_ERROR);
+        return;
+    }
 
     // Rebuild the roman numeral output string
     build_roman_numeral_str_from_counts(&obj->rnc_result, result);

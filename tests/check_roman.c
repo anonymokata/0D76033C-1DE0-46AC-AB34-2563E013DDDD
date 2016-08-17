@@ -25,11 +25,22 @@ END_TEST
 START_TEST(test_random_additions)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
-
-    // Basic test
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_add(r, "XIV", "LX", result);
     ck_assert_str_eq("LXXIV", result);
+}
+END_TEST
+
+START_TEST(test_addition_out_of_range)
+{
+    uint8_t result[MAX_ROMAN_LENGTH]; 
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "MM", "MM", result);
+    ck_assert_str_eq("Out of Range", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "MMI", "MM", result);
+    ck_assert_str_eq("Out of Range", result);
 }
 END_TEST
 
@@ -250,6 +261,7 @@ Suite * Roman_Suite(void)
     tcase_add_test(tc_add, test_roman_numeral_addition_compacting_result_req_2_3);
     tcase_add_test(tc_add, test_roman_numeral_addition_expansion_required_req_2_3);
     tcase_add_test(tc_add, test_random_additions);
+    tcase_add_test(tc_add, test_addition_out_of_range);
     suite_add_tcase(s, tc_add);
     
     return s;

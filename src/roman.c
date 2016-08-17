@@ -1,11 +1,17 @@
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 #include "roman.h"
+
+typedef struct Roman_Numeral_Count Roman_Numeral_Count;
+
+static const uint8_t INVALID_INPUT_ERROR[] = "Invalid Input";
 
 /*
 is_valid_numeral:
-This method evalutates the given numeral and ensures it vaild
+This class method evalutates the given numeral and ensures it vaild
 per the Roman Numeral Constraints defined in the requirements.
 
 returns: 1 is valid, zero otherwise
@@ -55,3 +61,45 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
 
     return ret;
 }
+
+struct Roman_Numeral_Count {
+    uint8_t I;
+    uint8_t V;
+    uint8_t X;
+    uint8_t L;
+    uint8_t C;
+    uint8_t D;
+    uint8_t M;
+};
+
+struct Roman {
+    Roman_Numeral_Count* rnc_op1;
+    Roman_Numeral_Count* rnc_op2;
+    Roman_Numeral_Count* rnc_result;
+    uint8_t result[MAX_ROMAN_LENGTH];
+};
+
+Roman * roman_create(void){
+    Roman* r = malloc(sizeof(Roman));
+
+    if(r == NULL) {
+        return NULL;
+    }
+
+    memset(r->result, '\0', MAX_ROMAN_LENGTH);
+    
+    return r;
+};
+
+void roman_free(Roman* r) {
+    free(r);
+    return;
+}
+
+uint8_t roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
+    strcpy(result, INVALID_INPUT_ERROR);
+    return 1;
+};
+
+
+

@@ -4,19 +4,29 @@
 #include <check.h>
 #include "../src/roman.h"
 
+Roman* r;
+
 void setup(void)
 {
-
+    r = roman_create();
 }
 
 void teardown(void)
 {
-
+    roman_free(r);
 }
 
 START_TEST(test_sanity)
 {
     ck_assert_int_eq(42, 42);
+}
+END_TEST
+
+START_TEST(test_roman_numeral_addition_invalid_inputs_req_2_1)
+{
+    uint8_t result[MAX_ROMAN_LENGTH]; 
+    roman_add(r, "BAD", "XLII", result);
+    ck_assert_str_eq("Invalid Input", result);
 }
 END_TEST
 
@@ -84,6 +94,7 @@ Suite * Roman_Suite(void)
     Suite *s;
     TCase *tc_core;
     TCase *tc_int_conv;
+    TCase *tc_add;
     
     s = suite_create("Roman");
 
@@ -101,6 +112,13 @@ Suite * Roman_Suite(void)
     tcase_add_test(tc_int_conv, test_V_L_D_repeats_no_more_than_one_time_req_1_6);
     tcase_add_test(tc_int_conv, test_max_roman_numeral_less_than_4000_req_1_7);
     suite_add_tcase(s, tc_int_conv);
+
+    /* Addition test case */
+    tc_add = tcase_create("Addition");
+    tcase_add_checked_fixture(tc_add, setup, teardown);
+    tcase_add_test(tc_add, test_roman_numeral_addition_invalid_inputs_req_2_1);
+    suite_add_tcase(s, tc_add);
+    
 
     return s;
 }

@@ -42,6 +42,10 @@ START_TEST(test_roman_numeral_addition_compacting_result_req_2_3)
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_add(r, "II", "II", result);
     ck_assert_str_eq("IV", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "VII", "II", result);
+    ck_assert_str_eq("IX", result);
 }
 END_TEST
 

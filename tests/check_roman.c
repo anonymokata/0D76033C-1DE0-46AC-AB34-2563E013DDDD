@@ -51,6 +51,21 @@ START_TEST(test_1_1_V)
 }
 END_TEST
 
+START_TEST(test_1_1_X)
+{
+    uint8_t is_valid;
+
+    is_valid = is_valid_numeral("X");
+    ck_assert_int_eq(VALID_NUMERAL, is_valid);
+
+    is_valid = is_valid_numeral("XXXXX");
+    ck_assert_int_eq(VALID_NUMERAL, is_valid);
+
+    is_valid = is_valid_numeral("XXXAXXX");
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+}
+END_TEST
+
 Suite * Roman_Suite(void)
 {
     Suite *s;
@@ -70,6 +85,7 @@ Suite * Roman_Suite(void)
     tcase_add_checked_fixture(tc_int_conv, setup, teardown);
     tcase_add_test(tc_int_conv, test_1_1_I);
     tcase_add_test(tc_int_conv, test_1_1_V);
+    tcase_add_test(tc_int_conv, test_1_1_X);
     suite_add_tcase(s, tc_int_conv);
 
     

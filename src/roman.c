@@ -15,7 +15,7 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
     uint8_t ret = VALID_NUMERAL;
 
     while(i < strlen(numeral)){
-        if((numeral[i] == 'I') || (numeral[i] == 'V')) {
+        if((numeral[i] == 'I') || (numeral[i] == 'V') || (numeral[i] == 'X')) {
             // NoOp
         } else {
             ret = INVALID_NUMERAL;

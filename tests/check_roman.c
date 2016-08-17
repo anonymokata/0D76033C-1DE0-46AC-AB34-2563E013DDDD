@@ -20,7 +20,7 @@ START_TEST(test_sanity)
 }
 END_TEST
 
-START_TEST(test_1_1_FULL)
+START_TEST(test_valid_roman_letters_req_1_1)
 {
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("I"));
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("V"));
@@ -53,7 +53,7 @@ Suite * Roman_Suite(void)
     /* Validation test case */
     tc_int_conv = tcase_create("Validation Conversions");
     tcase_add_checked_fixture(tc_int_conv, setup, teardown);
-    tcase_add_test(tc_int_conv, test_1_1_FULL);
+    tcase_add_test(tc_int_conv, test_valid_roman_letters_req_1_1);
     suite_add_tcase(s, tc_int_conv);
 
     

@@ -19,6 +19,7 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
            (numeral[i] == 'V') || 
            (numeral[i] == 'L') || 
            (numeral[i] == 'C') || 
+           (numeral[i] == 'D') || 
            (numeral[i] == 'X')) {
             // NoOp
         } else {

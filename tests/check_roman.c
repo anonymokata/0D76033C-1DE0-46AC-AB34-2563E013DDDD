@@ -71,6 +71,16 @@ START_TEST(test_1_1_C)
 }
 END_TEST
 
+START_TEST(test_1_1_D)
+{
+    uint8_t is_valid;
+    is_valid = is_valid_numeral("D");
+    ck_assert_int_eq(VALID_NUMERAL, is_valid);
+    is_valid = is_valid_numeral("DA");
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+}
+END_TEST
+
 Suite * Roman_Suite(void)
 {
     Suite *s;
@@ -93,6 +103,7 @@ Suite * Roman_Suite(void)
     tcase_add_test(tc_int_conv, test_1_1_X);
     tcase_add_test(tc_int_conv, test_1_1_L);
     tcase_add_test(tc_int_conv, test_1_1_C);
+    tcase_add_test(tc_int_conv, test_1_1_D);
     suite_add_tcase(s, tc_int_conv);
 
     

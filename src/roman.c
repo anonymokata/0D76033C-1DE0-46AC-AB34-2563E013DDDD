@@ -26,6 +26,8 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
     uint8_t last_value = NULL;
     uint8_t ret = VALID_NUMERAL;
 
+    // TODO: Protect against invalid subractives (valid: IV, IX, XL, XC, CD, CM)
+
     if(strlen(numeral) >= MAX_VALID_ROMAN_LENGTH) {
         return INVALID_NUMERAL;
     }
@@ -156,7 +158,7 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
 
     // Rebuild the roman numeral output string
     build_roman_numeral_str_from_counts(&obj->rnc_result, result);
-    
+
     return;
 };
 
@@ -234,11 +236,27 @@ void build_roman_numeral_str_from_counts(Roman_Numeral_Count* counts, uint8_t* r
     for(i=0; i<counts->X; i++){
         result_str[total++] = 'X';
     }
-    for(i=0; i<counts->V; i++){
-        result_str[total++] = 'V';
-    }
-    for(i=0; i<counts->I; i++){
-        result_str[total++] = 'I';
+
+    if(counts->I == 4) {
+        // Ok so there is a more compact way to write this... 
+        if(i<counts->V) {
+            // VIIII -> IX
+            result_str[total++] = 'I';
+            result_str[total++] = 'X';
+        } else { 
+            // IIII -> IV
+            result_str[total++] = 'I';
+            result_str[total++] = 'V';
+        }
+    } else {
+        // No compaction is needed
+        for(i=0; i<counts->V; i++){
+            result_str[total++] = 'V';
+        }
+
+        for(i=0; i<counts->I; i++){
+            result_str[total++] = 'I';
+        }
     }
 
     result_str[total++] = '\0';

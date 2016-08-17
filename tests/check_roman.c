@@ -28,10 +28,7 @@ START_TEST(test_1_1_I)
     is_valid = is_valid_numeral("I");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
 
-    is_valid = is_valid_numeral("IIIII");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-
-    is_valid = is_valid_numeral("IIIAIII");
+    is_valid = is_valid_numeral("IA");
     ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
 END_TEST
@@ -43,10 +40,7 @@ START_TEST(test_1_1_V)
     is_valid = is_valid_numeral("V");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
 
-    is_valid = is_valid_numeral("VVVVV");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-
-    is_valid = is_valid_numeral("VVVAVVV");
+    is_valid = is_valid_numeral("VA");
     ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
 END_TEST
@@ -58,10 +52,7 @@ START_TEST(test_1_1_X)
     is_valid = is_valid_numeral("X");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
 
-    is_valid = is_valid_numeral("XXXXX");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-
-    is_valid = is_valid_numeral("XXXAXXX");
+    is_valid = is_valid_numeral("XA");
     ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
 END_TEST

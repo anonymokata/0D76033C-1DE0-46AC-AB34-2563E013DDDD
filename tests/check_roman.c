@@ -23,71 +23,50 @@ END_TEST
 
 START_TEST(test_1_1_I)
 {
-    uint8_t is_valid;
-    is_valid = is_valid_numeral("I");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-    is_valid = is_valid_numeral("IA");
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("I"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("IA"));
 }
 END_TEST
 
 START_TEST(test_1_1_V)
 {
-    uint8_t is_valid;
-    is_valid = is_valid_numeral("V");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-    is_valid = is_valid_numeral("VA");
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("V"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("VA"));
 }
 END_TEST
 
 START_TEST(test_1_1_X)
 {
-    uint8_t is_valid;
-    is_valid = is_valid_numeral("X");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-    is_valid = is_valid_numeral("XA");
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("X"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("XA"));
 }
 END_TEST
 
 START_TEST(test_1_1_L)
 {
-    uint8_t is_valid;
-    is_valid = is_valid_numeral("L");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-    is_valid = is_valid_numeral("LA");
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("L"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("LA"));
 }
 END_TEST
 
 START_TEST(test_1_1_C)
 {
-    uint8_t is_valid;
-    is_valid = is_valid_numeral("C");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-    is_valid = is_valid_numeral("CA");
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("C"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("CA"));
 }
 END_TEST
 
 START_TEST(test_1_1_D)
 {
-    uint8_t is_valid;
-    is_valid = is_valid_numeral("D");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-    is_valid = is_valid_numeral("DA");
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("D"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("DA"));
 }
 END_TEST
 
 START_TEST(test_1_1_M)
 {
-    uint8_t is_valid;
-    is_valid = is_valid_numeral("M");
-    ck_assert_int_eq(VALID_NUMERAL, is_valid);
-    is_valid = is_valid_numeral("MA");
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("M"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("MA"));
 }
 END_TEST
 

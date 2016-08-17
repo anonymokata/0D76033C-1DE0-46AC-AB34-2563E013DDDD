@@ -9,13 +9,7 @@ typedef struct Roman_Numeral_Count Roman_Numeral_Count;
 
 static const uint8_t INVALID_INPUT_ERROR[] = "Invalid Input";
 
-/*
-is_valid_numeral:
-This class method evalutates the given numeral and ensures it vaild
-per the Roman Numeral Constraints defined in the requirements.
 
-returns: 1 is valid, zero otherwise
-*/
 uint8_t is_valid_numeral(uint8_t * numeral) {
     uint8_t i = 0;
     uint8_t duplicate_count = 1;
@@ -96,8 +90,18 @@ void roman_free(Roman* r) {
     return;
 }
 
-uint8_t roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
-    strcpy(result, INVALID_INPUT_ERROR);
+void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
+    // We first need to check the operands to ensure they're formatted correctly
+    if(INVALID_NUMERAL == is_valid_numeral(op1)){
+        strcpy(result, INVALID_INPUT_ERROR);
+        return;
+    }
+
+    if(INVALID_NUMERAL == is_valid_numeral(op2)){
+        strcpy(result, INVALID_INPUT_ERROR);
+        return;
+    }
+
     return 1;
 };
 

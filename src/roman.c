@@ -14,11 +14,8 @@ uint8_t is_valid_numeral(uint8_t * numeral) {
     uint8_t i = 0;
     uint8_t ret = VALID_NUMERAL;
 
-    printf("strlen %d\n", strlen(numeral));
-
     while(i < strlen(numeral)){
-        printf("\tNumeral[i] %c\n", numeral[i]);
-        if(numeral[i] == (uint8_t)('I')) {
+        if((numeral[i] == 'I') || (numeral[i] == 'V')) {
             // NoOp
         } else {
             ret = INVALID_NUMERAL;

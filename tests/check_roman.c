@@ -36,6 +36,21 @@ START_TEST(test_1_1_I)
 }
 END_TEST
 
+START_TEST(test_1_1_V)
+{
+    uint8_t is_valid;
+
+    is_valid = is_valid_numeral("V");
+    ck_assert_int_eq(VALID_NUMERAL, is_valid);
+
+    is_valid = is_valid_numeral("VVVVV");
+    ck_assert_int_eq(VALID_NUMERAL, is_valid);
+
+    is_valid = is_valid_numeral("VVVAVVV");
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+}
+END_TEST
+
 Suite * Roman_Suite(void)
 {
     Suite *s;
@@ -54,6 +69,7 @@ Suite * Roman_Suite(void)
     tc_int_conv = tcase_create("Validation Conversions");
     tcase_add_checked_fixture(tc_int_conv, setup, teardown);
     tcase_add_test(tc_int_conv, test_1_1_I);
+    tcase_add_test(tc_int_conv, test_1_1_V);
     suite_add_tcase(s, tc_int_conv);
 
     

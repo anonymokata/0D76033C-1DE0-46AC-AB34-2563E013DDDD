@@ -1,18 +1,2 @@
 Running suite(s): Roman
-strlen 1
-	Numeral[i] I
-strlen 5
-	Numeral[i] I
-	Numeral[i] I
-	Numeral[i] I
-	Numeral[i] I
-	Numeral[i] I
-strlen 7
-	Numeral[i] I
-	Numeral[i] I
-	Numeral[i] I
-	Numeral[i] A
-	Numeral[i] I
-	Numeral[i] I
-	Numeral[i] I
-100%: Checks: 2, Failures: 0, Errors: 0
+100%: Checks: 3, Failures: 0, Errors: 0

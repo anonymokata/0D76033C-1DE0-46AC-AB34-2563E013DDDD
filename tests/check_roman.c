@@ -22,10 +22,22 @@ START_TEST(test_sanity)
 }
 END_TEST
 
+START_TEST(test_roman_numeral_addition_req_2_3)
+{
+    uint8_t result[MAX_ROMAN_LENGTH]; 
+
+    // Basic test
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "II", "I", result);
+    ck_assert_str_eq("III", result);
+}
+END_TEST
+
+
 START_TEST(test_roman_numeral_addition_invalid_inputs_req_2_1)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
-    
+
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_add(r, "BAD", "XLII", result);
     ck_assert_str_eq("Invalid Input", result);
@@ -127,6 +139,7 @@ Suite * Roman_Suite(void)
     tc_add = tcase_create("Addition");
     tcase_add_checked_fixture(tc_add, setup, teardown);
     tcase_add_test(tc_add, test_roman_numeral_addition_invalid_inputs_req_2_1);
+    tcase_add_test(tc_add, test_roman_numeral_addition_req_2_3);
     suite_add_tcase(s, tc_add);
     
 

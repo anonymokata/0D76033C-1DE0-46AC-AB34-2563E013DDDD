@@ -22,7 +22,7 @@ START_TEST(test_sanity)
 }
 END_TEST
 
-START_TEST(test_roman_numeral_addition_req_2_3)
+START_TEST(test_roman_numeral_addition_simple_req_2_3)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
 
@@ -139,7 +139,7 @@ Suite * Roman_Suite(void)
     tc_add = tcase_create("Addition");
     tcase_add_checked_fixture(tc_add, setup, teardown);
     tcase_add_test(tc_add, test_roman_numeral_addition_invalid_inputs_req_2_1);
-    tcase_add_test(tc_add, test_roman_numeral_addition_req_2_3);
+    tcase_add_test(tc_add, test_roman_numeral_addition_simple_req_2_3);
     suite_add_tcase(s, tc_add);
     
 

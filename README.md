@@ -18,12 +18,6 @@ means four, "CM" means ninehundred).
     5. If the numeral is I, X or C you can't have more than three ("II" + "II" = "IV" not “IIII”).
     6. If the numeral is V, L or D you can't have more than one ("D" + "D" = "M" not “DD”)
     7. The maximum roman numeral is 3999 (MMMCMXCIX)
-2. Conversion Requirements (Derived / Implementation)
-    1. The application shall convert roman numeral operands to integers to perform operations.
-    2. Roman numeral string parameters shall not be modified during the conversion.
-    3. Invalid string parameters shall return null.
-    4. Valid string parameters shall return the converted integer.
-    5. Roman numerals greater than 3999 (R1.7) shall return null.
 
 ## Design Constraints
 1. Ubuntu Linux 14.04

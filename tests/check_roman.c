@@ -33,6 +33,40 @@ START_TEST(test_roman_numeral_addition_simple_req_2_3)
 }
 END_TEST
 
+START_TEST(test_roman_numeral_addition_simple_magnitue_req_2_3)
+{
+    uint8_t result[MAX_ROMAN_LENGTH]; 
+
+    // Basic test that increases the magnigtue of numeral
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "III", "III", result);
+    ck_assert_str_eq("VI", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "III", "II", result);
+    ck_assert_str_eq("V", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "V", "V", result);
+    ck_assert_str_eq("X", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "XXX", "XX", result);
+    ck_assert_str_eq("L", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "L", "L", result);
+    ck_assert_str_eq("C", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "CC", "CCC", result);
+    ck_assert_str_eq("D", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "D", "D", result);
+    ck_assert_str_eq("M", result);
+}
+END_TEST
 
 START_TEST(test_roman_numeral_addition_invalid_inputs_req_2_1)
 {
@@ -140,6 +174,7 @@ Suite * Roman_Suite(void)
     tcase_add_checked_fixture(tc_add, setup, teardown);
     tcase_add_test(tc_add, test_roman_numeral_addition_invalid_inputs_req_2_1);
     tcase_add_test(tc_add, test_roman_numeral_addition_simple_req_2_3);
+    tcase_add_test(tc_add, test_roman_numeral_addition_simple_magnitue_req_2_3);
     suite_add_tcase(s, tc_add);
     
 

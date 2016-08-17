@@ -7,6 +7,12 @@
 
 typedef struct Roman_Numeral_Count Roman_Numeral_Count;
 static const uint8_t INVALID_INPUT_ERROR[] = "Invalid Input";
+static const uint8_t MAX_I_VALUES = 5;
+static const uint8_t MAX_V_VALUES = 2;
+static const uint8_t MAX_X_VALUES = 5;
+static const uint8_t MAX_L_VALUES = 2;
+static const uint8_t MAX_C_VALUES = 5;
+static const uint8_t MAX_D_VALUES = 2;
 
 // Private / helper prototypes
 static void expand_compressed_numerals(uint8_t* src, uint8_t* dst);
@@ -100,6 +106,7 @@ void roman_free(Roman* r) {
 
 void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     uint8_t scratch[MAX_VALID_ROMAN_LENGTH];
+    uint8_t scratch_int;
 
     // We first need to check the operands to ensure they're formatted correctly
     if(INVALID_NUMERAL == is_valid_numeral(op1)){
@@ -126,13 +133,30 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     // Sum up the values
     sum_roman_numeral_counts(&obj->rnc_op1, &obj->rnc_op2, &obj->rnc_result);
 
-    // TODO: Compress additive logic (IIIII == V)
+    // Compress additive logic (IIIII == V) using 'values' of the roman numerals
+    obj->rnc_result.V += (obj->rnc_result.I / MAX_I_VALUES);
+    obj->rnc_result.I = obj->rnc_result.I % MAX_I_VALUES;
+
+    obj->rnc_result.X += (obj->rnc_result.V / MAX_V_VALUES);
+    obj->rnc_result.V = obj->rnc_result.V % MAX_V_VALUES;
+
+    obj->rnc_result.L += (obj->rnc_result.X / MAX_X_VALUES);
+    obj->rnc_result.X = obj->rnc_result.X % MAX_X_VALUES;
+
+    obj->rnc_result.C += (obj->rnc_result.L / MAX_L_VALUES);
+    obj->rnc_result.L = obj->rnc_result.L % MAX_L_VALUES;
+
+    obj->rnc_result.D += (obj->rnc_result.C / MAX_C_VALUES);
+    obj->rnc_result.C = obj->rnc_result.C % MAX_C_VALUES;
+
+    obj->rnc_result.M += (obj->rnc_result.D / MAX_D_VALUES);
+    obj->rnc_result.D = obj->rnc_result.D % MAX_D_VALUES;
+
+    // M is allowed to grow
 
     // Rebuild the roman numeral output string
     build_roman_numeral_str_from_counts(&obj->rnc_result, result);
-
-    printf("I : %d\n", obj->rnc_result.I);
-
+    
     return;
 };
 

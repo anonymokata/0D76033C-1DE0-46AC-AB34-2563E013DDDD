@@ -36,11 +36,13 @@ END_TEST
 START_TEST(test_roman_numeral_addition_expansion_required_req_2_3)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
-
-    // Basic test
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_add(r, "IV", "I", result);
     ck_assert_str_eq("V", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "IX", "I", result);
+    ck_assert_str_eq("X", result);
 }
 END_TEST
 

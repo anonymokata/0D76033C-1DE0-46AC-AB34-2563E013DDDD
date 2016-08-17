@@ -23,9 +23,16 @@ END_TEST
 
 START_TEST(test_1_1_I)
 {
-    uint8_t numeral[] = "I";
-    uint8_t is_valid = is_valid_numeral(numeral);
+    uint8_t is_valid;
+
+    is_valid = is_valid_numeral("I");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
+
+    is_valid = is_valid_numeral("IIIII");
+    ck_assert_int_eq(VALID_NUMERAL, is_valid);
+
+    is_valid = is_valid_numeral("IIIAIII");
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
 END_TEST
 

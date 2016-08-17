@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#define VALID_NUMERAL 1
-#define INVALID_NUMERAL 0
+static const uint8_t VALID_NUMERAL = 1;
+static const uint8_t  INVALID_NUMERAL = 0;
 
 uint8_t is_valid_numeral(uint8_t*);
 

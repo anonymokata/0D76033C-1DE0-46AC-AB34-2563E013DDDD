@@ -24,10 +24,8 @@ END_TEST
 START_TEST(test_1_1_I)
 {
     uint8_t is_valid;
-
     is_valid = is_valid_numeral("I");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
-
     is_valid = is_valid_numeral("IA");
     ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
@@ -36,10 +34,8 @@ END_TEST
 START_TEST(test_1_1_V)
 {
     uint8_t is_valid;
-
     is_valid = is_valid_numeral("V");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
-
     is_valid = is_valid_numeral("VA");
     ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
@@ -48,10 +44,8 @@ END_TEST
 START_TEST(test_1_1_X)
 {
     uint8_t is_valid;
-
     is_valid = is_valid_numeral("X");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
-
     is_valid = is_valid_numeral("XA");
     ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
@@ -60,11 +54,19 @@ END_TEST
 START_TEST(test_1_1_L)
 {
     uint8_t is_valid;
-
     is_valid = is_valid_numeral("L");
     ck_assert_int_eq(VALID_NUMERAL, is_valid);
-
     is_valid = is_valid_numeral("LA");
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid);
+}
+END_TEST
+
+START_TEST(test_1_1_C)
+{
+    uint8_t is_valid;
+    is_valid = is_valid_numeral("C");
+    ck_assert_int_eq(VALID_NUMERAL, is_valid);
+    is_valid = is_valid_numeral("CA");
     ck_assert_int_eq(INVALID_NUMERAL, is_valid);
 }
 END_TEST
@@ -90,6 +92,7 @@ Suite * Roman_Suite(void)
     tcase_add_test(tc_int_conv, test_1_1_V);
     tcase_add_test(tc_int_conv, test_1_1_X);
     tcase_add_test(tc_int_conv, test_1_1_L);
+    tcase_add_test(tc_int_conv, test_1_1_C);
     suite_add_tcase(s, tc_int_conv);
 
     

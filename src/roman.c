@@ -224,22 +224,48 @@ void build_roman_numeral_str_from_counts(Roman_Numeral_Count* counts, uint8_t* r
     for(i=0; i<counts->M; i++){
         result_str[total++] = 'M';
     }
-    for(i=0; i<counts->D; i++){
-        result_str[total++] = 'D';
-    }
-    for(i=0; i<counts->C; i++){
-        result_str[total++] = 'C';
-    }
-    for(i=0; i<counts->L; i++){
-        result_str[total++] = 'L';
-    }
-    for(i=0; i<counts->X; i++){
-        result_str[total++] = 'X';
-    }
 
+    if(counts->C == 4){
+        if(counts->D) {
+            // DCCCC -> CM
+            result_str[total++] = 'C';
+            result_str[total++] = 'M';
+        } else { 
+            // CCCC -> CD
+            result_str[total++] = 'C';
+            result_str[total++] = 'D';
+        }
+    } else {
+        for(i=0; i<counts->D; i++){
+            result_str[total++] = 'D';
+        }
+        for(i=0; i<counts->C; i++){
+            result_str[total++] = 'C';
+        }
+    }
+        
+    if(counts->X == 4) {
+        if(counts->L) {
+            // LXXXX -> XC
+            result_str[total++] = 'X';
+            result_str[total++] = 'C';
+        } else { 
+            // XXXX -> XL
+            result_str[total++] = 'X';
+            result_str[total++] = 'L';
+        }
+    } else {
+        for(i=0; i<counts->L; i++){
+            result_str[total++] = 'L';
+        }
+        for(i=0; i<counts->X; i++){
+            result_str[total++] = 'X';
+        }
+    }
+    
     if(counts->I == 4) {
         // Ok so there is a more compact way to write this... 
-        if(i<counts->V) {
+        if(counts->V) {
             // VIIII -> IX
             result_str[total++] = 'I';
             result_str[total++] = 'X';

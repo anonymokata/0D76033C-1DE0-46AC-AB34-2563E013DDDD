@@ -46,6 +46,22 @@ START_TEST(test_roman_numeral_addition_compacting_result_req_2_3)
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_add(r, "VII", "II", result);
     ck_assert_str_eq("IX", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "XX", "XX", result);
+    ck_assert_str_eq("XL", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "LXX", "XX", result);
+    ck_assert_str_eq("XC", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "CC", "CC", result);
+    ck_assert_str_eq("CD", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "DCC", "CC", result);
+    ck_assert_str_eq("CM", result);
 }
 END_TEST
 

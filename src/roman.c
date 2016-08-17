@@ -102,7 +102,7 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
         return;
     }
 
-    return 1;
+    return;
 };
 
 

@@ -25,8 +25,18 @@ END_TEST
 START_TEST(test_roman_numeral_addition_invalid_inputs_req_2_1)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
+    
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_add(r, "BAD", "XLII", result);
     ck_assert_str_eq("Invalid Input", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_add(r, "XLII", "BAD", result);
+    ck_assert_str_eq("Invalid Input", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);
+    roman_add(r, "XLII", "XLII", result);
+    ck_assert_str_ne("Invalid Input", result);
 }
 END_TEST
 

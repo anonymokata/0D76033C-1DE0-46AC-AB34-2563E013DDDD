@@ -20,56 +20,21 @@ START_TEST(test_sanity)
 }
 END_TEST
 
-
-START_TEST(test_1_1_I)
+START_TEST(test_1_1_FULL)
 {
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("I"));
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("IA"));
-}
-END_TEST
-
-START_TEST(test_1_1_V)
-{
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("V"));
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("VA"));
-}
-END_TEST
-
-START_TEST(test_1_1_X)
-{
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("X"));
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("XA"));
-}
-END_TEST
-
-START_TEST(test_1_1_L)
-{
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("L"));
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("LA"));
-}
-END_TEST
-
-START_TEST(test_1_1_C)
-{
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("C"));
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("CA"));
-}
-END_TEST
-
-START_TEST(test_1_1_D)
-{
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("D"));
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("DA"));
-}
-END_TEST
-
-START_TEST(test_1_1_M)
-{
     ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("M"));
-    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("MA"));
+    ck_assert_int_eq(VALID_NUMERAL, is_valid_numeral("MDCLXVI"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("MDCLXVIA"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("9MDCLXVI"));
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("MDCTLXVI"));
 }
 END_TEST
-
 
 Suite * Roman_Suite(void)
 {
@@ -88,13 +53,7 @@ Suite * Roman_Suite(void)
     /* Validation test case */
     tc_int_conv = tcase_create("Validation Conversions");
     tcase_add_checked_fixture(tc_int_conv, setup, teardown);
-    tcase_add_test(tc_int_conv, test_1_1_I);
-    tcase_add_test(tc_int_conv, test_1_1_V);
-    tcase_add_test(tc_int_conv, test_1_1_X);
-    tcase_add_test(tc_int_conv, test_1_1_L);
-    tcase_add_test(tc_int_conv, test_1_1_C);
-    tcase_add_test(tc_int_conv, test_1_1_D);
-    tcase_add_test(tc_int_conv, test_1_1_M);
+    tcase_add_test(tc_int_conv, test_1_1_FULL);
     suite_add_tcase(s, tc_int_conv);
 
     

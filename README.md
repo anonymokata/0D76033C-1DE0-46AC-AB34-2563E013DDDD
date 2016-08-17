@@ -18,6 +18,11 @@ means four, "CM" means ninehundred).
     5. If the numeral is I, X or C you can't have more than three ("II" + "II" = "IV" not “IIII”).
     6. If the numeral is V, L or D you can't have more than one ("D" + "D" = "M" not “DD”)
     7. The maximum roman numeral is 3999 (MMMCMXCIX)
+2. Addition Requirements (Derived)
+    1. Invalid roman numeral inputs shall return "Invalid Input".
+    2. Results that exceed 3999 (Req 1.7) shall return "Out of Range".
+    3. Successful operations shall return the sum of the two given inputs as a valid roman numeral string.
+
 
 ## Design Constraints
 1. Ubuntu Linux 14.04

@@ -40,12 +40,19 @@ void roman_free(Roman*);
 Using a provided instance, add Roman Numerals `op1` and `op2` to gether 
 and copy it to the `result` string.
 
-`op1 and `op` must be valid roman numerals
+`op1 and `op2` must be valid roman numerals
 Size of `result` must be atleast MAX_ROMAN_LENGTH bytes.
-
-returns: Resvered for future use
 */
 void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result);
+
+/* roman_subtract:
+Using a provided instance, subtract Roman Numerals `op2` from `op1` 
+and copy it to the `result` string.
+
+`op1 and `op2` must be valid roman numerals
+Size of `result` must be atleast MAX_ROMAN_LENGTH bytes.
+*/
+void roman_subtract(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result);
 
 
 #endif /* ROMAN_H */

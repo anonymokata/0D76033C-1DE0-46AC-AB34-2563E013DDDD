@@ -204,8 +204,12 @@ void roman_subtract(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     extract_numeral_counts(scratch, &obj->rnc_op2);
 
     // Subtact up the values 
-    subtract_roman_numeral_counts(&obj->rnc_op1, &obj->rnc_op2, &obj->rnc_result);
-    // TODO: do it.
+    if(!subtract_roman_numeral_counts(&obj->rnc_op1, &obj->rnc_op2, &obj->rnc_result)){
+        // Looks like they were asking more than we could give
+        strcpy(result, "");
+        return;
+    }
+
 
     // Compress additive logic (IIIII == V) using 'values' of the roman numerals
     obj->rnc_result.V += (obj->rnc_result.I / MAX_I_VALUES);

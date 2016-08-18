@@ -36,11 +36,18 @@ END_TEST
 START_TEST(test_roman_numeral_subtraction_borrow_chain_req_3_3)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
-
-    // Basic test
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_subtract(r, "MM", "I", result);
     ck_assert_str_eq("MCMXCIX", result);
+}
+END_TEST
+
+START_TEST(test_roman_numeral_subtraction_le_zero_req_3_2)
+{
+    uint8_t result[MAX_ROMAN_LENGTH]; 
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_subtract(r, "I", "II", result);
+    ck_assert_str_eq("", result);
 }
 END_TEST
 
@@ -311,6 +318,7 @@ Suite * Roman_Suite(void)
     tcase_add_test(tc_sub, test_roman_numeral_addition_invalid_inputs_req_2_1);
     tcase_add_test(tc_sub, test_roman_numeral_subtraction_simple_req_3_3);
     tcase_add_test(tc_sub, test_roman_numeral_subtraction_borrow_chain_req_3_3);
+    tcase_add_test(tc_sub, test_roman_numeral_subtraction_le_zero_req_3_2);
     suite_add_tcase(s, tc_sub);
     
     return s;

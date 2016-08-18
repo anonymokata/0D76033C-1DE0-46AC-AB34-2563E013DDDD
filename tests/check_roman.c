@@ -54,6 +54,18 @@ START_TEST(test_roman_numeral_subtraction_le_zero_req_3_2)
     memset(result, '\0', MAX_ROMAN_LENGTH);    
     roman_subtract(r, "I", "M", result);
     ck_assert_str_eq("", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_subtract(r, "I", "I", result);
+    ck_assert_str_eq("", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_subtract(r, "X", "X", result);
+    ck_assert_str_eq("", result);
+
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_subtract(r, "M", "M", result);
+    ck_assert_str_eq("", result);
 }
 END_TEST
 

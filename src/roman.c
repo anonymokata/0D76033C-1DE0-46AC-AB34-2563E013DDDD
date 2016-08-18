@@ -114,7 +114,6 @@ void roman_free(Roman* r) {
 
 void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     uint8_t scratch[MAX_VALID_ROMAN_EXPANDED_LENGTH];
-    uint8_t scratch_int;
 
     // We first need to check the operands to ensure they're formatted correctly
     if(INVALID_NUMERAL == is_valid_numeral(op1)){
@@ -159,7 +158,6 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
 
 void roman_subtract(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     uint8_t scratch[MAX_VALID_ROMAN_EXPANDED_LENGTH];
-    uint8_t scratch_int;
 
     // We first need to check the operands to ensure they're formatted correctly
     if(INVALID_NUMERAL == is_valid_numeral(op1)){

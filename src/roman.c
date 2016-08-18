@@ -22,6 +22,7 @@ static void sum_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Co
 static void build_roman_numeral_str_from_counts(Roman_Numeral_Count* counts, uint8_t* result_str);
 static uint8_t borrow_roman_numeral_counts(uint8_t borrower, Roman_Numeral_Count* rnc);
 static uint8_t subtract_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Count* rnc2, Roman_Numeral_Count* result);
+static void compress_additive_roman_numeral_counts(Roman_Numeral_Count* rnc);
 
 uint8_t is_valid_numeral(uint8_t * numeral) {
     /*
@@ -144,25 +145,7 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     sum_roman_numeral_counts(&obj->rnc_op1, &obj->rnc_op2, &obj->rnc_result);
 
     // Compress additive logic (IIIII == V) using 'values' of the roman numerals
-    obj->rnc_result.V += (obj->rnc_result.I / MAX_I_VALUES);
-    obj->rnc_result.I = obj->rnc_result.I % MAX_I_VALUES;
-
-    obj->rnc_result.X += (obj->rnc_result.V / MAX_V_VALUES);
-    obj->rnc_result.V = obj->rnc_result.V % MAX_V_VALUES;
-
-    obj->rnc_result.L += (obj->rnc_result.X / MAX_X_VALUES);
-    obj->rnc_result.X = obj->rnc_result.X % MAX_X_VALUES;
-
-    obj->rnc_result.C += (obj->rnc_result.L / MAX_L_VALUES);
-    obj->rnc_result.L = obj->rnc_result.L % MAX_L_VALUES;
-
-    obj->rnc_result.D += (obj->rnc_result.C / MAX_C_VALUES);
-    obj->rnc_result.C = obj->rnc_result.C % MAX_C_VALUES;
-
-    obj->rnc_result.M += (obj->rnc_result.D / MAX_D_VALUES);
-    obj->rnc_result.D = obj->rnc_result.D % MAX_D_VALUES;
-
-    // M is allowed to grow
+    compress_additive_roman_numeral_counts(&obj->rnc_result);
 
     // Ok - knowing that everything has been expanded we can safely use 
     // the total number of "M"s to see if we're over 3999
@@ -210,27 +193,8 @@ void roman_subtract(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
         return;
     }
 
-
     // Compress additive logic (IIIII == V) using 'values' of the roman numerals
-    obj->rnc_result.V += (obj->rnc_result.I / MAX_I_VALUES);
-    obj->rnc_result.I = obj->rnc_result.I % MAX_I_VALUES;
-
-    obj->rnc_result.X += (obj->rnc_result.V / MAX_V_VALUES);
-    obj->rnc_result.V = obj->rnc_result.V % MAX_V_VALUES;
-
-    obj->rnc_result.L += (obj->rnc_result.X / MAX_X_VALUES);
-    obj->rnc_result.X = obj->rnc_result.X % MAX_X_VALUES;
-
-    obj->rnc_result.C += (obj->rnc_result.L / MAX_L_VALUES);
-    obj->rnc_result.L = obj->rnc_result.L % MAX_L_VALUES;
-
-    obj->rnc_result.D += (obj->rnc_result.C / MAX_C_VALUES);
-    obj->rnc_result.C = obj->rnc_result.C % MAX_C_VALUES;
-
-    obj->rnc_result.M += (obj->rnc_result.D / MAX_D_VALUES);
-    obj->rnc_result.D = obj->rnc_result.D % MAX_D_VALUES;
-
-    // M is allowed to grow
+    compress_additive_roman_numeral_counts(&obj->rnc_result);
 
     // Rebuild the roman numeral output string
     build_roman_numeral_str_from_counts(&obj->rnc_result, result);
@@ -528,5 +492,29 @@ void build_roman_numeral_str_from_counts(Roman_Numeral_Count* counts, uint8_t* r
 
     result_str[total++] = '\0';
 
+    return;
+}
+
+void compress_additive_roman_numeral_counts(Roman_Numeral_Count* rnc) {
+    // Compress additive logic (IIIII == V) using 'values' of the roman numerals
+    rnc->V += (rnc->I / MAX_I_VALUES);
+    rnc->I = rnc->I % MAX_I_VALUES;
+
+    rnc->X += (rnc->V / MAX_V_VALUES);
+    rnc->V = rnc->V % MAX_V_VALUES;
+
+    rnc->L += (rnc->X / MAX_X_VALUES);
+    rnc->X = rnc->X % MAX_X_VALUES;
+
+    rnc->C += (rnc->L / MAX_L_VALUES);
+    rnc->L = rnc->L % MAX_L_VALUES;
+
+    rnc->D += (rnc->C / MAX_C_VALUES);
+    rnc->C = rnc->C % MAX_C_VALUES;
+
+    rnc->M += (rnc->D / MAX_D_VALUES);
+    rnc->D = rnc->D % MAX_D_VALUES;
+
+    // M is allowed to grow
     return;
 }

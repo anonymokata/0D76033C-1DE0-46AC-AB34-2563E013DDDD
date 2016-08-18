@@ -95,7 +95,6 @@ struct Roman {
     Roman_Numeral_Count rnc_op1;
     Roman_Numeral_Count rnc_op2;
     Roman_Numeral_Count rnc_result;
-    uint8_t result[MAX_ROMAN_LENGTH];
 };
 
 Roman * roman_create(void){
@@ -104,8 +103,6 @@ Roman * roman_create(void){
     if(r == NULL) {
         return NULL;
     }
-
-    memset(r->result, '\0', MAX_ROMAN_LENGTH);
     
     return r;
 };

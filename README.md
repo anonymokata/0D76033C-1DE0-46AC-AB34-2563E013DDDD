@@ -22,6 +22,11 @@ means four, "CM" means ninehundred).
     1. Invalid roman numeral inputs shall return "Invalid Input".
     2. Results that exceed 3999 (Req 1.7) shall return "Out of Range".
     3. Successful operations shall return the sum of the two given inputs as a valid roman numeral string.
+3. Subtraction Requirements (Derived)
+    1. Invalid roman numeral inputs shall return "Invalid Input".
+    2. Operands that yield a result less than zero shall return "Out of Range"
+    3. Operands that yield a result equal to zero shall return a null string.
+    4. Operands that yield a result greater than zero shall return a valid roman numeral string.
 
 
 ## Design Constraints

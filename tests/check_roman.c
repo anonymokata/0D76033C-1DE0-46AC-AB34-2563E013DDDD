@@ -22,6 +22,17 @@ START_TEST(test_sanity)
 }
 END_TEST
 
+START_TEST(test_roman_numeral_subtraction_simple_req_3_3)
+{
+    uint8_t result[MAX_ROMAN_LENGTH]; 
+
+    // Basic test
+    memset(result, '\0', MAX_ROMAN_LENGTH);    
+    roman_subtract(r, "II", "I", result);
+    ck_assert_str_eq("I", result);
+}
+END_TEST
+
 START_TEST(test_roman_numeral_subtraction_invalid_inputs_req_3_1)
 {
     uint8_t result[MAX_ROMAN_LENGTH]; 
@@ -39,7 +50,6 @@ START_TEST(test_roman_numeral_subtraction_invalid_inputs_req_3_1)
     ck_assert_str_ne("Invalid Input", result);
 }
 END_TEST
-
 
 START_TEST(test_random_additions)
 {
@@ -288,6 +298,7 @@ Suite * Roman_Suite(void)
     tc_sub = tcase_create("Subtraction");
     tcase_add_checked_fixture(tc_sub, setup, teardown);
     tcase_add_test(tc_sub, test_roman_numeral_addition_invalid_inputs_req_2_1);
+    tcase_add_test(tc_sub, test_roman_numeral_subtraction_simple_req_3_3);
     suite_add_tcase(s, tc_sub);
     
     return s;

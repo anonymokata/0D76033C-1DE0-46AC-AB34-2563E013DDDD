@@ -20,7 +20,9 @@ static void expand_compressed_numerals(uint8_t* src, uint8_t* dst);
 static void extract_numeral_counts(uint8_t* numeral, Roman_Numeral_Count* rnc);
 static void sum_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Count* rnc2, Roman_Numeral_Count* result); 
 static void build_roman_numeral_str_from_counts(Roman_Numeral_Count* counts, uint8_t* result_str);
- 
+static uint8_t borrow_roman_numeral_counts(uint8_t borrower, Roman_Numeral_Count* rnc);
+static uint8_t subtract_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Count* rnc2, Roman_Numeral_Count* result);
+
 uint8_t is_valid_numeral(uint8_t * numeral) {
     /*
     Note: The following TODO's are based on a previous knowledge about roman numerals. 
@@ -202,6 +204,7 @@ void roman_subtract(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     extract_numeral_counts(scratch, &obj->rnc_op2);
 
     // Subtact up the values 
+    subtract_roman_numeral_counts(&obj->rnc_op1, &obj->rnc_op2, &obj->rnc_result);
     // TODO: do it.
 
     // Compress additive logic (IIIII == V) using 'values' of the roman numerals
@@ -330,6 +333,124 @@ void sum_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Count* rn
     result->C = rnc1->C + rnc2->C;
     result->D = rnc1->D + rnc2->D;
     result->M = rnc1->M + rnc2->M;
+}
+
+uint8_t borrow_roman_numeral_counts(uint8_t borrower, Roman_Numeral_Count* rnc) {
+    // Recursive function used to keep borrowing from the next value
+    uint8_t neighbor_has_goods = 1;
+
+    if(borrower == 'I') {
+        if(!rnc->V)
+            neighbor_has_goods = borrow_roman_numeral_counts('V', rnc);
+
+        if(neighbor_has_goods) {
+            rnc->I += MAX_I_VALUES;
+            rnc->V -= 1;
+        }
+        return neighbor_has_goods;
+
+    } else if(borrower == 'V') {
+        if(!rnc->X)
+            neighbor_has_goods = borrow_roman_numeral_counts('X', rnc);
+
+        if(neighbor_has_goods) {
+            rnc->V += MAX_V_VALUES;
+            rnc->X -= 1;
+        }
+        return neighbor_has_goods;
+        
+    } else if(borrower == 'X') {
+        if(!rnc->L)
+            neighbor_has_goods = borrow_roman_numeral_counts('L', rnc);
+
+        if(neighbor_has_goods) {
+            rnc->X += MAX_X_VALUES;
+            rnc->L -= 1;
+        }
+        return neighbor_has_goods;
+        
+    } else if(borrower == 'L') {
+        if(!rnc->C)
+            neighbor_has_goods = borrow_roman_numeral_counts('C', rnc);
+
+        if(neighbor_has_goods) {
+            rnc->L += MAX_L_VALUES;
+            rnc->C -= 1;
+        }
+        return neighbor_has_goods;
+        
+    } else if(borrower == 'C') {
+        if(!rnc->D)
+            neighbor_has_goods = borrow_roman_numeral_counts('D', rnc);
+
+        if(neighbor_has_goods) {
+            rnc->C += MAX_C_VALUES;
+            rnc->D -= 1;
+        }
+        return neighbor_has_goods;
+
+    }  else if(borrower == 'D') {
+        if(!rnc->M)
+            neighbor_has_goods = 0;
+
+        if(neighbor_has_goods) {
+            rnc->D += MAX_D_VALUES;
+            rnc->M -= 1;
+        }
+        return neighbor_has_goods; 
+    }
+}
+
+uint8_t subtract_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Count* rnc2, Roman_Numeral_Count* result) {
+    // Subract the values, borrowing from the next highest value as needed
+    if(rnc2->I > rnc1->I) {
+        if(!borrow_roman_numeral_counts('I', rnc1)) {
+            return 0; 
+        }
+    }
+    result->I = rnc1->I - rnc2->I;
+
+    if(rnc2->V > rnc1->V) {
+        if(!borrow_roman_numeral_counts('V', rnc1)) {
+            return 0; 
+        }
+    }
+    result->V = rnc1->V - rnc2->V;
+
+    if(rnc2->X > rnc1->X) {
+        if(!borrow_roman_numeral_counts('X', rnc1)) {
+            return 0; 
+        }
+    }
+    result->X = rnc1->X - rnc2->X;
+
+    if(rnc2->L > rnc1->L) {
+        if(!borrow_roman_numeral_counts('L', rnc1)) {
+            return 0; 
+        }
+    }
+    result->L = rnc1->L - rnc2->L;
+
+    if(rnc2->C > rnc1->C) {
+        if(!borrow_roman_numeral_counts('C', rnc1)) {
+            return 0; 
+        }
+    }
+    result->C = rnc1->C - rnc2->C;
+
+    if(rnc2->D > rnc1->D) {
+        if(!borrow_roman_numeral_counts('D', rnc1)) {
+            return 0; 
+        }
+    }
+    result->D = rnc1->D - rnc2->D;
+
+    if(rnc2->M > rnc1->M) {
+        // No one else to borrow from...  
+        return 0;
+    }
+    result->M = rnc1->M - rnc2->M;
+    return 1;
 }
 
 void build_roman_numeral_str_from_counts(Roman_Numeral_Count* counts, uint8_t* result_str) {

@@ -293,6 +293,13 @@ START_TEST(test_valid_roman_letters_req_1_1)
 }
 END_TEST
 
+START_TEST(test_seg_fault_protection)
+{   
+    // Make sure long - normal looking - numerals are filtered out
+    ck_assert_int_eq(INVALID_NUMERAL, is_valid_numeral("XXXXXXXXXXXXXXXXXXXXXXXXX"));
+}
+END_TEST
+
 Suite * Roman_Suite(void)
 {
     Suite *s;
@@ -307,6 +314,7 @@ Suite * Roman_Suite(void)
     tc_core = tcase_create("Core");
     tcase_add_checked_fixture(tc_core, setup, teardown);
     tcase_add_test(tc_core, test_sanity);
+    tcase_add_test(tc_core, test_seg_fault_protection);
     suite_add_tcase(s, tc_core);
     
     /* Validation test case */

@@ -175,6 +175,62 @@ void roman_add(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
     return;
 };
 
+void roman_subtract(Roman* obj, uint8_t* op1, uint8_t* op2, uint8_t* result) {
+    uint8_t scratch[MAX_VALID_ROMAN_EXPANDED_LENGTH];
+    uint8_t scratch_int;
+
+    // We first need to check the operands to ensure they're formatted correctly
+    if(INVALID_NUMERAL == is_valid_numeral(op1)){
+        strcpy(result, INVALID_INPUT_ERROR);
+        return;
+    }
+
+    if(INVALID_NUMERAL == is_valid_numeral(op2)){
+        strcpy(result, INVALID_INPUT_ERROR);
+        return;
+    }
+
+    // We need to:
+    // 1.  expand the compressed values (4 and 9 multiples)
+    // 2.  Count the number of occurances in each numeral
+    memset(scratch, '\0', MAX_VALID_ROMAN_EXPANDED_LENGTH);    
+    expand_compressed_numerals(op1, scratch);
+    extract_numeral_counts(scratch, &obj->rnc_op1);
+
+    memset(scratch, '\0', MAX_VALID_ROMAN_EXPANDED_LENGTH);    
+    expand_compressed_numerals(op2, scratch);
+    extract_numeral_counts(scratch, &obj->rnc_op2);
+
+    // Subtact up the values 
+    // TODO: do it.
+
+    // Compress additive logic (IIIII == V) using 'values' of the roman numerals
+    obj->rnc_result.V += (obj->rnc_result.I / MAX_I_VALUES);
+    obj->rnc_result.I = obj->rnc_result.I % MAX_I_VALUES;
+
+    obj->rnc_result.X += (obj->rnc_result.V / MAX_V_VALUES);
+    obj->rnc_result.V = obj->rnc_result.V % MAX_V_VALUES;
+
+    obj->rnc_result.L += (obj->rnc_result.X / MAX_X_VALUES);
+    obj->rnc_result.X = obj->rnc_result.X % MAX_X_VALUES;
+
+    obj->rnc_result.C += (obj->rnc_result.L / MAX_L_VALUES);
+    obj->rnc_result.L = obj->rnc_result.L % MAX_L_VALUES;
+
+    obj->rnc_result.D += (obj->rnc_result.C / MAX_C_VALUES);
+    obj->rnc_result.C = obj->rnc_result.C % MAX_C_VALUES;
+
+    obj->rnc_result.M += (obj->rnc_result.D / MAX_D_VALUES);
+    obj->rnc_result.D = obj->rnc_result.D % MAX_D_VALUES;
+
+    // M is allowed to grow
+
+    // Rebuild the roman numeral output string
+    build_roman_numeral_str_from_counts(&obj->rnc_result, result);
+
+    return;
+};
+
 
 void expand_compressed_numerals(uint8_t* src, uint8_t* dst){
     // We can assume the src will be valid as it's should checked prior to this call

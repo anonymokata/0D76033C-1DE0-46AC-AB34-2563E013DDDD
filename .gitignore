@@ -1,7 +1,6 @@
 *.o
 *.lo
 .vscode/
-*.cache
-build-aux/
-.deps/
-.libs/
+*.a
+roman
+roman-check

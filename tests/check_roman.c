@@ -1,4 +1,3 @@
-#include <config.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <check.h>
@@ -341,7 +340,7 @@ Suite * Roman_Suite(void)
     /* Subtraction test case */
     tc_sub = tcase_create("Subtraction");
     tcase_add_checked_fixture(tc_sub, setup, teardown);
-    tcase_add_test(tc_sub, test_roman_numeral_addition_invalid_inputs_req_2_1);
+    tcase_add_test(tc_sub, test_roman_numeral_subtraction_invalid_inputs_req_3_1);
     tcase_add_test(tc_sub, test_roman_numeral_subtraction_simple_req_3_3);
     tcase_add_test(tc_sub, test_roman_numeral_subtraction_borrow_chain_req_3_3);
     tcase_add_test(tc_sub, test_roman_numeral_subtraction_le_zero_req_3_2);

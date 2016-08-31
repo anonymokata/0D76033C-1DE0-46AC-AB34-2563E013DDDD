@@ -352,7 +352,7 @@ uint8_t borrow_roman_numeral_counts(uint8_t borrower, Roman_Numeral_Count* rnc) 
         }
         return neighbor_has_goods;
 
-    }  else if(borrower == 'D') {
+    } else if(borrower == 'D') {
         if(!rnc->M)
             neighbor_has_goods = 0;
 
@@ -362,6 +362,8 @@ uint8_t borrow_roman_numeral_counts(uint8_t borrower, Roman_Numeral_Count* rnc) 
         }
         return neighbor_has_goods; 
     }
+
+    return 0;
 }
 
 uint8_t subtract_roman_numeral_counts(Roman_Numeral_Count* rnc1, Roman_Numeral_Count* rnc2, Roman_Numeral_Count* result) {

@@ -1,4 +1,6 @@
 LIBS=-lcheck
+#  Ignore the warnings on the string pointers needing to be signed
+CFLAGS=-Wall -Wno-pointer-sign
 default: roman
 
 .PHONY: clean
@@ -13,16 +15,16 @@ clean:
 #  Library building actions
 #######################################
 roman: src/main.o roman.a
-	gcc $^ -o $@
+	gcc $(CFLAGS) $^ -o $@
 
 src/main.o: src/main.c
-	gcc -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 
 roman.a: src/roman.o
 	ar rcs $@ $^
 
 src/roman.o: src/roman.c src/roman.h
-	gcc -c -o $@ $<
+	gcc $(CFLAGS) -c -o $@ $<
 
 # Unit testing actions
 #######################################
@@ -31,8 +33,8 @@ check: roman-check
 	./$<
 
 roman-check: tests/check_roman.o roman.a
-	gcc -o $@ $^ $(LIBS) 
+	gcc $(CFLAGS) -o $@ $^ $(LIBS) 
 
 tests/check_roman.o: tests/check_roman.c src/roman.h
-	gcc -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 

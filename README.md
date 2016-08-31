@@ -37,6 +37,8 @@ means four, "CM" means ninehundred).
 6. git
 
 ## Development Notes
-The boiler plate for this project was based on the Autotools example found on the [Check Tutorial](https://libcheck.github.io/check/doc/check_html/check_3.html#Setting-Up-the-Money-Build-Using-CMake).
+The boiler plate for this project was originally based on the Autotools example found on the [Check Tutorial](https://libcheck.github.io/check/doc/check_html/check_3.html#Setting-Up-the-Money-Build-Using-CMake).
 
+The latest version in master is now using the standard GNU make for all of the build / test operations.
+ 
 If you can find a real use for this code base it's licensed under the MIT License. 
